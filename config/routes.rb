@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new' #ログインと会員登録ではアクションが違う
   resources :users, only: [:index, :show, :new, :create]
+  
+  get 'regisration', to: 'books#new'
+  post 'regisration', to: 'books#create'
+  resources :books, only: [:show, :edit, :create, :destroy]
 end

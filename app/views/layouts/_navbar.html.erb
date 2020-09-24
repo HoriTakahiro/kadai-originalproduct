@@ -8,20 +8,20 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <li class="nav-item"><%= link_to '本の登録', users_path, class: 'nav-link' %></li>　<!--オリジナル課題専用--><!--URLの編集が必要-->
+          <li class="nav-item"><%= link_to '本の登録', regisration_path, class: 'nav-link' %></li>　<!--オリジナル課題専用--><!--URLの編集が必要-->
           <li class="nav-item"><%= link_to 'ユーザー一覧', users_path, class: 'nav-link' %></li>　<!--オリジナル課題専用-->
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>　<!--オリジナル課題専用--><!--URLの編集が必要-->
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a><!--オリジナル課題専用--><!--URLの編集が必要-->
             <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to '登録した本', user_path(current_user) %></li>　<!--オリジナル課題専用--><!--URLの編集が必要-->
+              <li class="dropdown-item"><%= link_to '登録した本', user_path(current_user) %></li><!--オリジナル課題専用--><!--URLの編集が必要-->
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'コメント一覧', user_path(current_user) %></li>　<!--オリジナル課題専用--><!--URLの編集が必要-->
+              <li class="dropdown-item"><%= link_to 'コメント一覧', user_path(current_user) %></li><!--オリジナル課題専用--><!--URLの編集が必要-->
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'フォロー', user_path(current_user) %></li>　<!--オリジナル課題専用--><!--URLの編集が必要-->
+              <li class="dropdown-item"><%= link_to 'フォロー', user_path(current_user) %></li><!--オリジナル課題専用--><!--URLの編集が必要-->
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'フォロワー', user_path(current_user) %></li>　<!--オリジナル課題専用--><!--URLの編集が必要-->
+              <li class="dropdown-item"><%= link_to 'フォロワー', user_path(current_user) %></li><!--オリジナル課題専用--><!--URLの編集が必要-->
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li> <!--オリジナル課題専用-->
+              <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li><!--オリジナル課題専用-->
             </ul>
           </li>
         <% else %>
