@@ -4,10 +4,8 @@
 
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
-
     <%= form_with(model: @book, local: true) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
-      
       <div class="form-group">
         <%= f.label :name, '本の名前' %> <!--オリジナル課題専用-->
         <%= f.text_field :name, class: 'form-control' %>

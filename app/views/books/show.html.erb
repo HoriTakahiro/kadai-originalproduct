@@ -1,2 +1,21 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+  <div class="row">
+    <li class="media mb-3">
+      <div class="media-body">
+        <div>
+          <%= link_to @book.user.name, user_path(@book.user) %> <span class="text-muted">posted at <%= @book.created_at %></span>
+        </div>
+        <div>
+          <p>タイトル：　<%= link_to @book.name, book_path(@book) %></p> <!--オリジナル課題専用--><!--リンク先を設置しないといけない-->
+          <p>著者： <%= @book.author %></p>
+          <p>本の説明：　<%= @book.description %></p>
+        </div>
+        <div>
+          <% if current_user == @book.user %>
+            <%= link_to "編集 ", edit_book_path(@book), class: 'btn btn-danger btn-sm' %>
+            <%= link_to "削除 ", @book, method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
+        </div>
+
+      </div>
+    </li>
+  </div>

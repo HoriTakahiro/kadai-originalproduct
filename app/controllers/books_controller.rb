@@ -1,18 +1,28 @@
 class BooksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:update, :destroy]
   
-  def index
-  end
 
   def new
     @book = current_user.books.build
   end
 
   def show
+    @book = Book.find_by(id: params[:id])
   end
   
   def edit
+    @book = current_user.books.find_by(id: params[:id])
+  end
+  
+  def update
+    if @book.update(book_params)
+      flash[:success] = '本の編集に成功しました。'
+      redirect_to root_url
+    else
+      flash.now[:danger] = '本の編集に失敗しました。'
+      render :edit
+    end    
   end
   
   def create
