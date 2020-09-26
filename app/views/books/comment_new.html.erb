@@ -1,0 +1,34 @@
+<div class="text-center">
+  <h1><%= @book.name %> へのコメント</h1> <!--オリジナル課題専用-->
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= form_with(model: @comment, url: comment_create_book_path(@book), local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+
+      
+      <div class="form-group ">
+          <%= f.radio_button :good_or_bad, 1 %>
+          <%= f.label :good_or_bad, 'Good' %> <!--オリジナル課題専用-->
+          <%= f.radio_button :good_or_bad, 0 %>
+          <%= f.label :good_or_bad, 'Bad' %> <!--オリジナル課題専用-->
+      </div>
+
+      <div class="form-group">
+        <%= f.label :simple, '一言でいうと' %>　<!--オリジナル課題専用-->
+        <%= f.text_field :simple, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :additional, '詳しく言うと　' %>　<!--オリジナル課題専用-->
+        <%= f.text_field :additional, class: 'form-control' %>
+      </div>
+      
+      <%= f.hidden_field :book_id, :value => @book.id %>
+
+      <%= f.submit 'コメントする', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>

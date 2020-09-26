@@ -6,7 +6,7 @@
           <%= link_to book.user.name, user_path(book.user) %> <span class="text-muted">posted at <%= book.created_at %></span>
         </div>
         <div>
-          <p>タイトル：　<%= link_to book.name, book_path(book) %></p> <!--オリジナル課題専用--><!--リンク先を設置しないといけない-->
+          <p>タイトル：　<%= link_to book.name, comments_book_path(book) %></p> <!--オリジナル課題専用--><!--リンク先を設置しないといけない-->
           <p>著者： <%= book.author %></p>
           <p>本の説明：　<%= book.description %></p>
         </div>

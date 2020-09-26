@@ -15,7 +15,13 @@ Rails.application.routes.draw do
   
   get 'regisration', to: 'books#new'
   post 'regisration', to: 'books#create'
-  resources :books, only: [:show, :edit, :create, :update, :destroy]
+  resources :books, only: [:edit, :create, :update, :destroy] do
+    member do
+      get :comments
+      get :comment_new
+      post :comment_create
+    end
+  end
   
   resources :relationships, only: [:create, :destroy]
 end

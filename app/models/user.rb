@@ -6,6 +6,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   has_many :books
+  has_many :comments
+
   
   has_many :relationships
   has_many :followings, through: :relationships, source: :follow

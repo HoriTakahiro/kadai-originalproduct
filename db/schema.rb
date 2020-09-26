@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_030711) do
+ActiveRecord::Schema.define(version: 2020_09_26_072324) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 2020_09_25_030711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "good_or_bad"
+    t.string "simple"
+    t.string "additional"
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -32,6 +44,15 @@ ActiveRecord::Schema.define(version: 2020_09_25_030711) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["comment_id"], name: "index_reviews_on_comment_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -41,6 +62,10 @@ ActiveRecord::Schema.define(version: 2020_09_25_030711) do
   end
 
   add_foreign_key "books", "users"
+  add_foreign_key "comments", "books"
+  add_foreign_key "comments", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "comments"
 end
