@@ -1,48 +1,24 @@
-  <div class="row">
-    <li class="media mb-3">
-      <div class="media-body">
-        <div>
-          <%= link_to @book.user.name, user_path(@book.user) %> <span class="text-muted">posted at <%= @book.created_at %></span>
-          <%= render 'relationships/follow_button', user: @book.user %>
+<h3 class="text-center">投稿された本の一覧</h3>
+<div class="row">
+    <div class="col-sm-6">
+        <p class="p-1 m-0 mt-1"><%= link_to @book.user.name, user_path(@book.user) %>　さんの投稿</p>
+        <div class="card m-1">
+            <h5 class="card-header p-1"><%= @book.name %>  <small class="text-muted">著者： <%= @book.author %></small></h5>
+            <div class="card-boby m-1 p-1">
+                <p class="card-text"><span class="badge badge-secondary">説明</span><br><%= @book.description %></p>
+                <!--ボタン-->
+                <span class="badge badge-primary">Good<i class="fas fa-thumbs-up"></i>：<span class="badge badge-dark"><%= @count_good_comments %></span></span>
+                <span class="badge badge-warning">Bad<i class="fas fa-thumbs-down"></i>：<span class="badge badge-da"><%= @count_bad_comments %></span></span>
+            </div>
+            <div class="card-footer p-1 m-0">
+                 <small class="text-muted m-0">投稿日:<%= @book.created_at.strftime('%Y/%m/%d') %></small>
+            </div>
         </div>
-        <div>
-          <p>タイトル：　<%= link_to @book.name, book_path(@book) %></p> <!--オリジナル課題専用--><!--リンク先を設置しないといけない-->
-          <p>著者： <%= @book.author %></p>
-          <p>本の説明：　<%= @book.description %></p>
-          <p>Good：<%= @count_good_comments %></p>
-          <p>bad：<%= @count_bad_comments %></p>
-        </div>
-        <div>
-          <% if current_user == @book.user %>
-            <%= link_to "編集 ", edit_book_path(@book), class: 'btn btn-danger btn-sm' %>
-            <%= link_to "削除 ", @book, method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: 'btn btn-danger btn-sm' %>
-          <% end %>
-        </div>
-
-      </div>
-    </li>
-    <%= link_to 'コメントする', comment_new_book_path(@book), class: 'btn btn-primary btn-block' %>　<!--オリジナル課題専用-->
-    
-    <h2>コメント一覧：　<%= @count_comments %> 件</h2>
-    <% if @comments.any? %>
-      <ul class="list-unstyled">
-        <% @comments.each do |comment| %>
-            <li>
-              <p>ユーザー名: <%= comment.user.name %></p>
-              <% if comment.good_or_bad == 1 %>
-                <p>Good</p>
-              <% else %>
-                <p>Bad</p>
-              <% end %>
-              <p><%= comment.simple %></p>
-              <p><%= comment.additional %></p>
-              <% if current_user == comment.user %>
-                <%= link_to "削除 ", comment_delete_book_path(@book), method: :delete, data: { confirm: "本当に削除してもいいですか?" },class: 'btn btn-danger btn-sm' %>
-              <% end %>
-            </li>
-        <% end %>
-      </ul>
-
-      <%= paginate @comments %> <!--ページネーション-->
-    <% end %>
-  </div>
+    <div ="text_center">
+        <%= link_to 'コメントする', comment_new_book_path(@book), class: 'btn btn-primary btn-block' %>　<!--オリジナル課題専用-->
+    </div>
+        
+        <h3 class="text_center">コメント一覧：　<%= @count_comments %> 件</h3>
+        <%= render 'comments/comments', comments: @comments %>
+    </div> 
+</div>

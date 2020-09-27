@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     @count_books = user.books.count
     @count_followings = user.followings.count
     @count_followers = user.followers.count
+    @count_comments = user.comments.count
   end
   
   def comment_count(book)

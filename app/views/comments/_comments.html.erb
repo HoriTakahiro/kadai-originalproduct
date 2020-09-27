@@ -1,2 +1,27 @@
-<h1>Comments#new</h1>
-<p>Find me in app/views/comments/new.html.erb</p>
+<% if comments.any? %>
+    <ul class="list-unstyled">
+        <% comments.each do |comment| %>
+            <li>
+                <div class="card m-1">
+                    <h5 class="card-header p-1"><%= comment.user.name %>　のコメント</h5>
+                    <div class="card-body m-1 p-1">
+                        <% if comment.good_or_bad == '1' %>
+                            <p><span class="badge badge-primary">Good<i class="fas fa-thumbs-up"></i></span></p>
+                        <% elsif comment.good_or_bad == '0' %>
+                            <p><span class="badge badge-warning">Bad<i class="fas fa-thumbs-down"></i></span></p>
+                        <% end %>
+                        <p><span class="badge badge-secondary mb-0">一言で</span><br><%= comment.simple %></p>
+                        <p><span class="badge badge-secondary mb-0">補足すると</span><br><%= comment.additional %></p>
+                        <% if current_user == comment.user %>
+                            <p><%= link_to "削除 ", comment_delete_book_path(comment.book), method: :delete, data: { confirm: "本当に削除してもいいですか?" },class: 'btn-sm btn-danger' %><p/>
+                        <% end %>
+                    </div>
+                    <div class="card-footer p-1 m-0">
+                        <p class="text-muted m-0"><small><%= comment.created_at.strftime('%Y/%m/%d') %></small></p>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+    <%= paginate comments %> <!--ページネーション-->
+    </ul>
+<% end %>

@@ -10,7 +10,8 @@
 
       
       <div class="form-group ">
-          <%= f.radio_button :good_or_bad, 1 %>
+          <p>Goodか？Badか？</p>
+          <%= f.radio_button :good_or_bad, 1, checked: true %>
           <%= f.label :good_or_bad, 'Good' %> <!--オリジナル課題専用-->
           <%= f.radio_button :good_or_bad, 0 %>
           <%= f.label :good_or_bad, 'Bad' %> <!--オリジナル課題専用-->
