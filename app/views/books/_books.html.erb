@@ -4,11 +4,14 @@
       <div class="media-body">
         <div>
           <%= link_to book.user.name, user_path(book.user) %> <span class="text-muted">posted at <%= book.created_at %></span>
+          <%= render 'relationships/follow_button', user: book.user %>
         </div>
         <div>
           <p>タイトル：　<%= link_to book.name, comments_book_path(book) %></p> <!--オリジナル課題専用--><!--リンク先を設置しないといけない-->
           <p>著者： <%= book.author %></p>
           <p>本の説明：　<%= book.description %></p>
+          <p>Good：<%= book.comments.where(good_or_bad: 1).count %></p>
+          <p>bad：<%= book.comments.where(good_or_bad: 0).count %></p>
         </div>
         <div>
           <% if current_user == book.user %>

@@ -7,8 +7,6 @@ class BooksController < ApplicationController
     @book = current_user.books.build
   end
 
-
-  
   def edit
     @book = current_user.books.find_by(id: params[:id])
   end
@@ -42,6 +40,8 @@ class BooksController < ApplicationController
   
   def comments
     @book = Book.find(params[:id])
+    @comments = @book.comments.page(params[:page])
+    comment_count(@book)
   end
   
   def comment_new
@@ -60,6 +60,14 @@ class BooksController < ApplicationController
       @book = Book.find(@comment.book_id)
       render action: :comment_new
     end
+  end
+  
+  def comment_delete
+    @book = Book.find(params[:id])
+    @comment = @book.comments.find_by(book_id: @book)
+    @comment.destroy
+    flash[:success] = '投稿を削除しました'
+    redirect_to comments_book_path(@book)
   end
 
   private

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :comments
       get :comment_new
       post :comment_create
+      delete :comment_delete
     end
   end
   
